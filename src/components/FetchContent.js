@@ -55,7 +55,7 @@ const FetchContent = () => {
             })}
           </div>
           <div className="loading">{loading && <Loading />} </div>
-          <div className="error">{error && "Error"}</div>
+          <div className="error">{error && "No more content"}</div>
         </div>
       </div>
     </React.Fragment>
