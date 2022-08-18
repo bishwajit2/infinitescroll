@@ -24,3 +24,9 @@ img {
 h2.photo-heading {
   margin-bottom: 50px;
 }
+
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: masonry;
+}
