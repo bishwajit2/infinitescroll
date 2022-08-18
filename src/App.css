@@ -30,3 +30,36 @@ h2.photo-heading {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: masonry;
 }
+
+.image-wrapper {
+  position: relative;
+}
+
+.image-info {
+  position: absolute;
+  bottom: 15px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  column-gap: 17px;
+}
+
+.image-info p {
+  margin: 0;
+}
+
+.image-info .profile-image {
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
+
+.image-info .profile-image img {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.single-photo-item a {
+  color: #fff;
+}

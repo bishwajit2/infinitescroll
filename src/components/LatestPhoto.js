@@ -57,6 +57,23 @@ export default function LatestPhoto() {
       });
   };
 
+  const loadNextSearchPage = () => {
+    setPageNumber(pageNumber + 1);
+    axios
+      .get(
+        "https://api.unsplash.com/search/photos/?client_id=ZwvsyV46dMJ_qiFF-ZKj5a2vzugKSk5vDHPBbm4R0GM&per_page=12&page=" +
+          pageNumber +
+          "&query=" +
+          query
+      )
+      .then((res) => {
+        setPhotos(res.data.results);
+        setLoading(false);
+        setSearching(true);
+        setPageNumber(pageNumber + 1);
+      });
+  };
+
   console.log(photos);
   if (loading) {
     return (
@@ -87,15 +104,20 @@ export default function LatestPhoto() {
               photos.map((photo) => (
                 <div key={photo.id} className="single-photo-item">
                   <a href="/">
-                    <img src={photo.urls.small} alt="" />
-                    <h5>
-                      {photo.description
-                        ? photo.description.slice(0, 15)
-                        : "No title"}
-                    </h5>
-                    <p className="cat-name">
-                      By - {photo.user.first_name} {photo.user.last_name}
-                    </p>
+                    <div className="image-wrapper">
+                      <img src={photo.urls.small} alt="" />
+                      <div className="image-info">
+                        <div className="profile-image">
+                          <img src={photo.user.profile_image.small} alt="" />
+                        </div>
+                        <div className="avatar-info">
+                          <h5>
+                            {photo.user.first_name} {photo.user.last_name}
+                          </h5>
+                          <p className="cat-name"></p>
+                        </div>
+                      </div>
+                    </div>
                   </a>
                 </div>
               ))}
@@ -104,9 +126,15 @@ export default function LatestPhoto() {
       </div>
       <div className="row">
         <div className="col">
-          <button type="button" onClick={loadNextPage}>
-            Page No - {pageNumber}
-          </button>
+          {searching ? (
+            <button type="button" onClick={loadNextSearchPage}>
+              Page No - {pageNumber}
+            </button>
+          ) : (
+            <button type="button" onClick={loadNextPage}>
+              Page No - {pageNumber}
+            </button>
+          )}
         </div>
       </div>
     </>
