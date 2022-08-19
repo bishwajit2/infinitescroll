@@ -20,10 +20,11 @@ export default function LatestPhoto() {
         setPhotos(res.data);
         setLoading(false);
       });
-  }, [pageNumber]);
+    window.scrollTo(0, 0);
+    console.log(photos);
+  }, []);
 
   const loadNextPage = () => {
-    setPageNumber(pageNumber + 1);
     axios
       .get(
         "https://api.unsplash.com/photos/?client_id=ZwvsyV46dMJ_qiFF-ZKj5a2vzugKSk5vDHPBbm4R0GM&per_page=12&page=" +
@@ -32,6 +33,8 @@ export default function LatestPhoto() {
       .then((res) => {
         setPhotos(res.data);
         setLoading(false);
+        setPageNumber(pageNumber + 1);
+        setSearching(false);
       });
   };
 
@@ -74,7 +77,6 @@ export default function LatestPhoto() {
       });
   };
 
-  console.log(photos);
   if (loading) {
     return (
       <div className="row">
